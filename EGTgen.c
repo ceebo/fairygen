@@ -10,7 +10,9 @@
 #include <string.h>
 
 #define VERSION "1.2"
+#ifndef MEN
 #define MEN 3
+#endif
 #define DIAGSYM
 #define XWHITEDUPLE
 #define CONV conv
