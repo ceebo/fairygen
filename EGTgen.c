@@ -7,6 +7,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #define VERSION "1.2"
 #define MEN 3
@@ -746,7 +747,7 @@ void play()
 		    else continue;
 		} else {
                     printf("octal position number: "), scanf("%o", &j);
-                    if(j&~077) curpos = j; else curpos = curpos&~077|j;
+                    if(j&~077) playpos = j; else playpos = playpos&~077|j;
 		}
 		if(force) continue;
 		curpos = playpos;
@@ -799,7 +800,7 @@ int main(int argc, char **argv)
         p = (char *) malloc(SIZE+4096);
         if(p == NULL) exit(1);
 
-        tb = (char*)((int)p+4095&~4095);    /* align with cash line         */
+        for(tb=p;4095&(long)tb;) ++tb;    /* align with cash line         */
         printf("%x %x\n",p, tb);
 
 	if(argc > 1 && !strcmp(argv[1], "-xboard")) xboard++, argc--, argv++, strcpy(xh, "1 0 0 0 "),
